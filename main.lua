@@ -48,12 +48,15 @@ end
 function love.update(dt)
     timer = timer + dt 
 
-    if timer > 1 then
+    if timer > 3 then
         table.insert(objects, Object())
         timer = 0
     end
 
     for k, object in pairs(objects) do 
+        if object:collides(player) then
+            object.dx = 0
+        end 
         object:update(dt)
     end
 

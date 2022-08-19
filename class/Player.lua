@@ -8,24 +8,27 @@ function Player:init(x, y)
 
     self.width = 5
     self.height = 5
+
+    self.dx = 100
+    self.dy = 100
 end
 
 function Player:update(dt)
 
     if love.keyboard.isDown("up") then
-        self.y = self.y - PLAYER_MOVEMENT_SPEED * dt
+        self.y = self.y - self.dy * dt
     end
 
     if love.keyboard.isDown("down") then 
-        self.y = self.y +  PLAYER_MOVEMENT_SPEED * dt
+        self.y = self.y +  self.dy  * dt
     end
 
     if love.keyboard.isDown("left") then
-        self.x = self.x - PLAYER_MOVEMENT_SPEED * dt
+        self.x = self.x - self.dx  * dt
     end
 
     if love.keyboard.isDown("right") then 
-        self.x = self.x +  PLAYER_MOVEMENT_SPEED * dt
+        self.x = self.x +  self.dx * dt
     end
 
     if self.x < 0 or self.x > VIRTUAL_WIDTH - 5 then 
