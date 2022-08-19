@@ -15,11 +15,17 @@ VIRTUAL_HEIGHT = 243
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
 
+    love.window.setTitle("Splatter - TBD")
+
+    math.randomseed(os.time())
+
     push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
         fullscreen = false,
         resizable = true,
         vsync = true
     })
+
+    fpsFont = love.graphics.newFont("fonts/pixel_bug.otf", 8)
 
     player = Player(VIRTUAL_WIDTH / 2 - 2.5,  VIRTUAL_HEIGHT / 2 - 2.5)
     
@@ -71,13 +77,15 @@ function love.draw()
     
     player:render()
 
+    displayFPS()
+
     push:finish()
 end
 
 
--- function displayFPS()
---     -- simple FPS display across all states
---     love.graphics.setFont(smallFont)
---     love.graphics.setColor(0, 255/255, 0, 255/255)
---     love.graphics.print('FPS: ' .. tostring(love.timer.getFPS()), 10, 10)
--- end
+function displayFPS()
+    -- simple FPS display across all states
+    love.graphics.setFont(fpsFont)
+    love.graphics.setColor(0, 255/255, 0, 255/255)
+    love.graphics.print('FPS: ' .. tostring(love.timer.getFPS()), 10, 10)
+end
