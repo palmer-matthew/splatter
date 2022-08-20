@@ -1,16 +1,4 @@
--- require external scritps for use in main
-push = require "scripts/push"
-Class = require "scripts/class"
-
--- require developed classes for use in main
-require "class/Player"
-require "class/Object"
-
-WINDOW_WIDTH = 1280
-WINDOW_HEIGHT = 720
-
-VIRTUAL_WIDTH = 432
-VIRTUAL_HEIGHT = 243
+require "src/dependencies"
 
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
@@ -32,6 +20,8 @@ function love.load()
     objects = {}
 
     timer = 0
+
+    love.keyboard.keysPressed = {}
 end
 
 function love.resize(w,h)
@@ -39,11 +29,17 @@ function love.resize(w,h)
 end
 
 function love.keypressed(key)
+
+    love.keyboard.keysPressed[key] = true
+    
     if key == "escape" then 
         love.event.quit()
     end
 end
 
+function love.keyboard.wasPressed(key)
+    return love.keyboard.keysPressed[key] and true or false
+end
 
 function love.update(dt)
     timer = timer + dt 
